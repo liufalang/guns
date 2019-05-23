@@ -30,7 +30,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(exclude = {WebAutoConfiguration.class})
 public class GunsApplication {
 
-    private final static Logger logger = LoggerFactory.getLogger(GunsApplication.class);
+    private final static Logger logger =   LoggerFactory.getLogger(GunsApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(GunsApplication.class, args);
