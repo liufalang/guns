@@ -58,6 +58,11 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         elem: '#birthday'
     });
 
+    // 渲染入所时间选择框
+    laydate.render({
+        elem: '#joinDate'
+    });
+
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/mgr/edit", function (data) {
