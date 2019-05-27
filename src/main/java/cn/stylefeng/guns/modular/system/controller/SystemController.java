@@ -34,6 +34,8 @@ import cn.stylefeng.roses.core.util.ToolUtil;
 import cn.stylefeng.roses.kernel.model.exception.RequestEmptyException;
 import cn.stylefeng.roses.kernel.model.exception.ServiceException;
 import cn.stylefeng.roses.kernel.model.exception.enums.CoreExceptionEnum;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -254,8 +256,18 @@ public class SystemController extends BaseController {
     @RequestMapping("/getGroupName")
     @ResponseBody
     public JSONObject getGroupName() {
+        JSONObject jo=new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        jo.put("id","111");
+        jo.put("name","机电专业");
 
-
+        jsonArray.add(jo);
+        jo.put("id","112");
+        jo.put("name","电器专业");
+        jsonArray.add(jo);
+        JSONObject jb=new JSONObject();
+        jb.put("data",jsonArray);
+        return jb;
     }
 
 }

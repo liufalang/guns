@@ -87,7 +87,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         $.getJSON("/system/getGroupName?deptName="+data.value, function(data){
             var optionstring = "";
             $.each(data.data, function(i,item){
-                optionstring += "<option value=\"" + item.groupId + "\" >" + item.groupName + "</option>";
+                optionstring += "<option value=\"" + item.id + "\" >" + item.name + "</option>";
             });
             $("#groupId").html('<option value=""></option>' + optionstring);
             form.render('select'); //这个很重要
