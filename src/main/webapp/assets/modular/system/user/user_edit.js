@@ -8,6 +8,7 @@ var UserInfoDlg = {
     }
 };
 
+
 layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
@@ -15,6 +16,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     var admin = layui.admin;
     var laydate = layui.laydate;
     var layer = layui.layer;
+    var layedit = layui.layedit;
 
     // 让当前iframe弹层高度适应
     admin.iframeAuto();
@@ -42,6 +44,8 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
             }
         });
     });
+
+
 
     // 添加表单验证方法
     form.verify({
@@ -83,14 +87,36 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     });
 
 
-    form.on('select(deptName)', function(data){
-        $.getJSON("/system/getGroupName?deptName="+data.value, function(data){
-            var optionstring = "";
-            $.each(data.data, function(i,item){
-                optionstring += "<option value=\"" + item.id + "\" >" + item.name + "</option>";
-            });
-            $("#groupId").html('<option value=""></option>' + optionstring);
-            form.render('select'); //这个很重要
-        });
-    });
+    // form.on('select(groupId)', function(data) {
+    //     $.getJSON(Feng.ctxPath + "/system/getGroupName", function (data) {
+    //         var optionstring = "";
+    //         $.each(data.data, function (i, item) {
+    //             optionstring += "<option value=\"" + item.id + "\" >" + item.name + "</option>";
+    //         });
+    //         $("#groupId").html("<option value=\"" + "" + "\" >"+optionstring);
+    //         form.render('select'); //这个很重要
+    //     });
+    // })
+
+//     $(function () {
+//         $.ajax({
+// //提交数据的类型 POST GET
+//             type: "POST",
+// //提交的网址
+//         url: Feng.ctxPath+"/system/getGroupName",
+// //提交的数据
+// //返回数据的格式
+//         datatype: "json",//"xml", "html", "script", "json", "jsonp", "text".
+// //成功返回之后调用的函数
+//         success: function (data) {
+//             $.each(data, function (index, item) {
+//                 $('#groupId').append(new Option(item.name, item.id));// 下拉菜单里添加元素
+//             });
+//             layui.form.render("select");
+//             alert(data.toString())
+//         }, error: function () {
+//             alert("查询部门失败！！！")
+//         }
+//     });
+//     })
 });
