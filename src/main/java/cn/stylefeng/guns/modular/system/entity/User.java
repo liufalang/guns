@@ -122,4 +122,10 @@ public class User implements Serializable {
 
     @TableField("JOIN_DATE")
     private Date joinDate;
+
+    @TableField("stationDescription")
+    private String stationDescription;
+
+    @TableField("work_time")
+    private String workTime;
 }

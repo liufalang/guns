@@ -21,7 +21,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -138,9 +140,10 @@ public class UserService extends ServiceImpl<UserMapper, User> {
      * @author fengshuonan
      * @Date 2018/12/24 22:45
      */
-    public Page<Map<String, Object>> selectUsers(DataScope dataScope, String name, String beginTime, String endTime, Long deptId) {
+    public Page<Map<String, Object>> selectUsers(DataScope dataScope, String name, String deptName, String groupId, Long deptId, String
+             certificate, String workTime) {
         Page page = LayuiPageFactory.defaultPage();
-        return this.baseMapper.selectUsers(page, dataScope, name, beginTime, endTime, deptId);
+        return this.baseMapper.selectUsers(page, dataScope, name, deptName, groupId, deptId,certificate,workTime);
     }
 
     /**

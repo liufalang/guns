@@ -63,6 +63,8 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         elem: '#joinDate'
     });
 
+
+
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/mgr/edit", function (data) {
@@ -78,5 +80,17 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         });
         ajax.set(data.field);
         ajax.start();
+    });
+
+
+    form.on('select(deptName)', function(data){
+        $.getJSON("/system/getGroupName?deptName="+data.value, function(data){
+            var optionstring = "";
+            $.each(data.data, function(i,item){
+                optionstring += "<option value=\"" + item.groupId + "\" >" + item.groupName + "</option>";
+            });
+            $("#groupId").html('<option value=""></option>' + optionstring);
+            form.render('select'); //这个很重要
+        });
     });
 });
