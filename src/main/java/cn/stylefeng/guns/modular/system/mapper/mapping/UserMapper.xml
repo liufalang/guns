@@ -22,6 +22,10 @@
         <result column="UPDATE_TIME" property="updateTime"/>
         <result column="UPDATE_USER" property="updateUser"/>
         <result column="VERSION" property="version"/>
+        <result column="stationStatus" property="stationStatus"/>
+        <result column="certificate" property="certificate"/>
+        <result column="work_time" property="workTime"/>
+        <result column="group_Id" property="groupId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -29,14 +33,16 @@
         USER_ID AS userId, AVATAR AS avatar, ACCOUNT AS account,
         NAME AS name, BIRTHDAY AS birthday, SEX AS sex, EMAIL AS email, PHONE AS phone,
          ROLE_ID AS roleId, DEPT_ID AS deptId, STATUS AS status, CREATE_TIME AS createTime, CREATE_USER AS createUser,
-          UPDATE_TIME AS updateTime, UPDATE_USER AS updateUser, VERSION AS version
+          UPDATE_TIME AS updateTime, UPDATE_USER AS updateUser, VERSION AS version,
+          stationStatus,certificate,work_time workTime,group_Id groupId
     </sql>
 
     <sql id="Base_Column_List_With_Pwd">
 		 USER_ID AS userId, AVATAR AS avatar, ACCOUNT AS account, PASSWORD AS password,
         SALT AS salt, NAME AS name, BIRTHDAY AS birthday, SEX AS sex, EMAIL AS email, PHONE AS phone,
          ROLE_ID AS roleId, DEPT_ID AS deptId, STATUS AS status, CREATE_TIME AS createTime, CREATE_USER AS createUser,
-          UPDATE_TIME AS updateTime, UPDATE_USER AS updateUser, VERSION AS version
+          UPDATE_TIME AS updateTime, UPDATE_USER AS updateUser, VERSION AS version,
+           stationStatus,certificate,work_time workTime,group_Id groupId
 	</sql>
 
     <select id="selectUsers" resultType="map">

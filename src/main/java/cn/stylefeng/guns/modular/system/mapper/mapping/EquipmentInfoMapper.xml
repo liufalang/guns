@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.mapper.EquipmentInfoMapper">
+
+    <sql id="Base_Column_List">
+        ept.dept_id  deptId ,ept.ept_code eptCode ,ept.ept_model eptModel ,
+        ept.ept_name eptName ,ept.ept_oem eptOem,
+        ept.ept_person  eptPerson,ept.ept_status eptStatus,ept.ept_type eptType,ept.ept_value
+        eptValue,
+        ept.factory_code factoryCode ,ept.id id,ept.is_standard_device isStandardDevice,
+        ept.measur_rang measurRang,ept.open_time openTime
+        ,ept.procurement_time procurementTime,ept.professional_use professionalUse,
+        ept.storage_location storageLocation,ept.uncertainty uncertainty
+    </sql>
+    <select id="selectEquipmentInfos" resultType="map">
+        select  <include refid="Base_Column_List"/>
+        from equipment_info ept
+       <!-- <if test="condition != null">
+            where ept.dcs_certificate_code like CONCAT('%',#{condition},'%')
+        </if>-->
+        order by ept.open_Time asc
+    </select>
+
+    <delete id="deleteEquipmentInfosById">
+		delete from equipment_info where id = #{id}
+	</delete>
+
+    <select id="findEquipmentInfosById" resultType="cn.stylefeng.guns.modular.system.entity.EquipmentInfo">
+        select  <include refid="Base_Column_List"/>
+        from equipment_info ept where ept.id = #{id}
+	</select>
+</mapper>

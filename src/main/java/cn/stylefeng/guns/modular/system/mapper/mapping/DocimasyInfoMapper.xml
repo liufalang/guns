@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.mapper.DocimasyInfoMapper">
+
+    <select id="selectDocimasyInfos" resultType="map">
+        select  di.id ,di.dcs_certificate_code  dcsCertificateCode
+        ,di.dcs_code  dcsCode ,di.dcs_cost dcs_cost ,di.dcs_inspection dcsInspection,di.dcs_Month dcsMonth,
+        di.dcs_next_time dcsNextTime,di.dcs_result dcsResult,di.dcs_time dcsTime,di.dcs_unit dcsUnit,
+        di.is_dcs_scene isDcsScene,di.other_cost otherCost ,di.type_code typeCode,di.type_id typeId
+        from  docimasy_info di
+        <if test="condition != null">
+            where di.dcs_certificate_code like CONCAT('%',#{condition},'%')
+        </if>
+        order by di.dcs_time asc
+    </select>
+
+    <delete id="deleteDocimasyInfosById">
+		delete from docimasy_info where id = #{id}
+	</delete>
+    <select id="findDocimasyInfosById" resultType="cn.stylefeng.guns.modular.system.entity.DocimasyInfo">
+		 select  di.id ,di.dcs_certificate_code  dcsCertificateCode
+        ,di.dcs_code  dcsCode ,di.dcs_cost dcs_cost ,di.dcs_inspection dcsInspection,di.dcs_Month dcsMonth,
+        di.dcs_next_time dcsNextTime,di.dcs_result dcsResult,di.dcs_time dcsTime,di.dcs_unit dcsUnit,
+        di.is_dcs_scene isDcsScene,di.other_cost otherCost ,di.type_code typeCode,di.type_id typeId
+        from  docimasy_info di where di.id = #{id}
+	</select>
+
+    <select id="findDocimasyInfosByIds" resultType="cn.stylefeng.guns.modular.system.entity.DocimasyInfo">
+		 select  di.id ,di.dcs_certificate_code  dcsCertificateCode,
+		 di.dcs_code  dcsCode ,di.dcs_cost dcs_cost ,di.dcs_inspection dcsInspection,di.dcs_Month dcsMonth,
+        di.dcs_next_time dcsNextTime,di.dcs_result dcsResult,di.dcs_time dcsTime,di.dcs_unit dcsUnit,
+        di.is_dcs_scene isDcsScene,di.other_cost otherCost ,di.type_code typeCode,di.type_id typeId
+        from  docimasy_info di   where di.type_id = #{typeID}
+	</select>
+</mapper>

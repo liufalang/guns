@@ -2,6 +2,7 @@ package cn.stylefeng.guns.modular.system.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -111,4 +112,12 @@ public class User implements Serializable {
     @TableField("VERSION")
     private Integer version;
 
+    @TableField("certificate")
+    private String certificate;
+    @TableField("stationStatus")
+    private String stationStatus;
+    @TableField("work_time")
+    private Date  workTime;
+    @TableField("group_Id")
+    private Long groupId;
 }

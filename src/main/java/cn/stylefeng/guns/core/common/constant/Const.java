@@ -30,12 +30,12 @@ public interface Const {
     /**
      * 默认管理系统的名称
      */
-    String DEFAULT_SYSTEM_NAME = "Guns管理系统";
+    String DEFAULT_SYSTEM_NAME = "综合管理平台";
 
     /**
      * 默认欢迎界面的提示
      */
-    String DEFAULT_WELCOME_TIP = "欢迎使用Guns管理系统!";
+    String DEFAULT_WELCOME_TIP = "检验检测业务综合管理平台!";
 
     /**
      * 系统默认的管理员密码

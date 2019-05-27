@@ -38,13 +38,13 @@ public class LayuiPageFactory {
     public static Page defaultPage() {
         HttpServletRequest request = HttpContext.getRequest();
 
-        //每页多少条数据
+       /* //每页多少条数据
         int limit = Integer.valueOf(request.getParameter("limit"));
 
         //第几页
-        int page = Integer.valueOf(request.getParameter("page"));
+        int page = Integer.valueOf(request.getParameter("page"));*/
 
-        return new Page(page, limit);
+        return new Page(1, 10);
     }
 
     /**

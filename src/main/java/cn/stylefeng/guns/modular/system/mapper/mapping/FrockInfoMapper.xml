@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.mapper.FrockInfoMapper">
+
+    <sql id="Base_Column_List">
+	f.dept_id deptId,
+	f.factory_code factoryCode,
+	f.fro_code froCode,
+	f.fro_model froModel,
+	f.fro_name froName,
+	f.fro_oem froOem,
+	f.fro_person froPerson,
+	f.fro_status froStatus,
+	f.id id,
+	f.is_check isCheck,
+	f.open_time openTime,
+	f.procurement_time procurementTime,
+	f.professional_use professionalUse,
+	f.storage_location storageLocation
+    </sql>
+    
+    
+    <select id="selectFrockInfos" resultType="map">
+        select  <include refid="Base_Column_List"/>
+        FROM
+        frock_info f
+       <!-- <if test="condition != null">
+            where f.dcs_certificate_code like CONCAT('%',#{condition},'%')
+        </if>-->
+        order by f.open_time asc
+    </select>
+
+    <delete id="deleteFrockInfosById">
+		delete from frock_info where id = #{id}
+	</delete>
+    <select id="findFrockInfosById" resultType="cn.stylefeng.guns.modular.system.entity.FrockInfo">
+        select  <include refid="Base_Column_List"/>
+        FROM
+        frock_info f where f.id = #{id}
+	</select>
+</mapper>
