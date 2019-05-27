@@ -48,6 +48,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -176,30 +177,37 @@ public class UserMgrController extends BaseController {
     @Permission
     @ResponseBody
     public Object list(@RequestParam(required = false) String name,
-                       @RequestParam(required = false) String timeLimit,
-                       @RequestParam(required = false) Long deptId) {
+                       @RequestParam(required = false) String certificate,
+                       @RequestParam(required = false) Long deptId,
+                       @RequestParam(required = false) String deptName,
+                       @RequestParam(required = false) String groupId,
+                       @RequestParam(required = false) String workTime
+
+    ) {
 
         //拼接查询条件
-        String beginTime = "";
-        String endTime = "";
+//        String beginTime = "";
+//        String endTime = "";
 
-        if (ToolUtil.isNotEmpty(timeLimit)) {
-            String[] split = timeLimit.split(" - ");
-            beginTime = split[0];
-            endTime = split[1];
-        }
+//        if (ToolUtil.isNotEmpty(certificate)) {
+//            String[] split = certificate.split(" - ");
+//            beginTime = split[0];
+//            endTime = split[1];
+//        }
 
         if (ShiroKit.isAdmin()) {
-            Page<Map<String, Object>> users = userService.selectUsers(null, name, beginTime, endTime, deptId);
+            Page<Map<String, Object>> users = userService.selectUsers(null, name, deptName, groupId, deptId,certificate,workTime);
             Page wrapped = new UserWrapper(users).wrap();
             return LayuiPageFactory.createPageInfo(wrapped);
         } else {
             DataScope dataScope = new DataScope(ShiroKit.getDeptDataScope());
-            Page<Map<String, Object>> users = userService.selectUsers(dataScope, name, beginTime, endTime, deptId);
+            Page<Map<String, Object>> users = userService.selectUsers(dataScope, name, deptName, groupId, deptId,certificate,workTime);
             Page wrapped = new UserWrapper(users).wrap();
             return LayuiPageFactory.createPageInfo(wrapped);
         }
     }
+
+
 
     /**
      * 添加管理员

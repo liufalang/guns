@@ -19,6 +19,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
         }
     };
 
+
     /**
      * 初始化表格的列
      */
@@ -36,12 +37,16 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
             {field: 'joinDate', sort: true, title: '入所日期'},
             {field: 'email', sort: true, title: '邮箱'},
             {field: 'phone', sort: true, title: '电话'},
-            {field: 'createTime', sort: true, title: '创建时间'},
-            {field: 'status', sort: true, templet: '#statusTpl', title: '状态'},
-            {align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 280}
+            {field: 'stationStatus', sort: true,  title: '在岗状态'},
+            {field: 'workTime', sort: true,  title: '上岗时间'}
+            // ,{field: 'stationStatus', sort: true, templet: '#statusTpl', title: '在岗状态'}
+            // {align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 280}
         ]];
     };
+    laydate.render({
+        elem: '#workTime'
 
+    });
     /**
      * 选择部门时
      */
@@ -57,6 +62,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
         var queryData = {};
         queryData['deptId'] = MgrUser.condition.deptId;
         queryData['name'] = $("#name").val();
+        queryData['deptName'] = $("#deptName").val();
+        queryData['groupId'] = $("#groupId").val();
+        queryData['certificate'] = $("#certificate").val();
+        queryData['workTime'] = $("#workTime").val();
         table.reload(MgrUser.tableId, {where: queryData});
     };
 
@@ -191,15 +200,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
         url: Feng.ctxPath + '/mgr/list',
         page: true,
         height: "full-158",
-        cellMinWidth: 100,
+        cellMinWidth: 80,
         cols: MgrUser.initColumn()
     });
 
     //渲染时间选择框
     laydate.render({
-        elem: '#timeLimit',
-        range: true,
-        max: Feng.currentDate()
+        elem: '#joinDate'
     });
 
     //初始化左侧部门树

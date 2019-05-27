@@ -14,6 +14,8 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     var form = layui.form;
     var admin = layui.admin;
     var laydate = layui.laydate;
+
+    // var laydate1 = layui.laydate;
     var layer = layui.layer;
 
     // 让当前iframe弹层高度适应
@@ -52,6 +54,14 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     laydate.render({
         elem: '#birthday'
     });
+    // $("#birthday").remove();
+    $("#joinDate").removeAttr("lay-key");
+    // 渲染入所时间选择框
+    laydate.render({
+        elem: '#joinDate'
+    });
+
+
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {

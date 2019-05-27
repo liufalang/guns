@@ -34,6 +34,7 @@ import cn.stylefeng.roses.core.util.ToolUtil;
 import cn.stylefeng.roses.kernel.model.exception.RequestEmptyException;
 import cn.stylefeng.roses.kernel.model.exception.ServiceException;
 import cn.stylefeng.roses.kernel.model.exception.enums.CoreExceptionEnum;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,6 +76,11 @@ public class SystemController extends BaseController {
     @RequestMapping("/welcome")
     public String console() {
         return "/modular/frame/welcome.html";
+    }
+
+    @RequestMapping("/user_qry")
+    public String userQry() {
+        return "/modular/system/user/user_qry.html";
     }
 
     /**
@@ -243,6 +249,13 @@ public class SystemController extends BaseController {
         hashMap.put("deptName", ConstantFactory.me().getDeptName(user.getDeptId()));
 
         return ResponseData.success(hashMap);
+    }
+
+    @RequestMapping("/getGroupName")
+    @ResponseBody
+    public JSONObject getGroupName() {
+
+
     }
 
 }

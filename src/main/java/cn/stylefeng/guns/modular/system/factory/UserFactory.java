@@ -80,6 +80,15 @@ public class UserFactory {
             if (ToolUtil.isNotEmpty(newUser.getPhone())) {
                 oldUser.setPhone(newUser.getPhone());
             }
+            if (ToolUtil.isNotEmpty(newUser.getGroupId())) {
+                oldUser.setGroupId(newUser.getGroupId());
+            }
+            if (ToolUtil.isNotEmpty(newUser.getCertificate())) {
+                oldUser.setCertificate(newUser.getCertificate());
+            }if (ToolUtil.isNotEmpty(newUser.getJoinDate())) {
+                oldUser.setJoinDate(newUser.getJoinDate());
+            }
+
             return oldUser;
         }
     }

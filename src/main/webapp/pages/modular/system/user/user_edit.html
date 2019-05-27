@@ -15,11 +15,17 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">邮箱<span style="color: red;">*</span></label>
+        <label class="layui-form-label">入所日期</label>
         <div class="layui-input-block">
-            <input name="email" placeholder="请输入邮箱" type="text" class="layui-input" lay-verify="required|email" required />
+            <input id="joinDate" name="joinDate" placeholder="请输入入所日期" type="text" class="layui-input" autocomplete="off"/>
         </div>
     </div>
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">邮箱<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="email" placeholder="请输入邮箱" type="text" class="layui-input" lay-verify="required|email" required />-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="layui-form-item">
         <label class="layui-form-label">性别</label>
         <div class="layui-input-block">
@@ -34,12 +40,34 @@
             <input id="deptName" name="deptName" placeholder="请输入部门" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
         </div>
     </div>
+
     <div class="layui-form-item">
-        <label class="layui-form-label">电话</label>
+        <label class="layui-form-label">专业组<span style="color: red;">*</span></label>
         <div class="layui-input-block">
-            <input name="phone" placeholder="请输入电话" type="text" class="layui-input"/>
+            <select name="groupId" id="groupId" class="layui-input">
+                <option value="" placeholder="请输入专业组" ></option>
+            </select>
+        </div>
+        <!--<div class="layui-input-block">-->
+            <!--<input id="groupId1" name="groupId1" type="hidden">-->
+            <!--<input id="groupId" name="groupId" placeholder="请输入专业组" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>-->
+        <!--</div>-->
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">持有证书<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="certificate1" name="certificate1" type="hidden">
+            <input id="certificate" name="certificate" placeholder="请输入持有证书" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
         </div>
     </div>
+
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">电话</label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="phone" placeholder="请输入电话" type="text" class="layui-input"/>-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="layui-form-item text-right">
         <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
         <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>

@@ -43,10 +43,5 @@ public class UserDto {
     private Long deptId;
     private String status;
     private String avatar;
-    private String certificate;
-    private String stationStatus;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date  workTime;
-    private Long groupId;
 
 }
