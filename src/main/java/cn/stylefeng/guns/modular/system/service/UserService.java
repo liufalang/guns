@@ -141,7 +141,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
      * @Date 2018/12/24 22:45
      */
     public Page<Map<String, Object>> selectUsers(DataScope dataScope, String name, String deptName, String groupId, Long deptId, String
-             certificate, String workTime) {
+            certificate, String workTime) {
         Page page = LayuiPageFactory.defaultPage();
         return this.baseMapper.selectUsers(page, dataScope, name, deptName, groupId, deptId,certificate,workTime);
     }

@@ -111,4 +111,23 @@ public class User implements Serializable {
     @TableField("VERSION")
     private Integer version;
 
+    @TableField("group_Id")
+    private String groupId;
+
+    @TableField("certificate")
+    private String certificate;
+
+    @TableField("stationStatus")
+    private  String stationStatus;
+
+    @TableField("JOIN_DATE")
+    private Date joinDate;
+
+    @TableField("stationDescription")
+    private String stationDescription;
+
+    @TableField("work_time")
+    private String workTime;
+
+
 }

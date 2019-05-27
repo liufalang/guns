@@ -44,4 +44,10 @@ public class UserDto {
     private String status;
     private String avatar;
 
+    private String groupId;
+    private String certificate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date joinDate;
+
 }
