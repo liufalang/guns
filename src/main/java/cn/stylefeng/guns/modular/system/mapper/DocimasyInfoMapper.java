@@ -23,7 +23,7 @@ public interface DocimasyInfoMapper extends BaseMapper<DocimasyInfo> {
      * @return
      * @date 2017年2月12日 下午9:14:34
      */
-    Page<Map<String, Object>> selectDocimasyInfos(@Param("page") Page page, @Param("condition") String condition);
+    Page<Map<String, Object>> selectDocimasyInfos(@Param("page") Page page, @Param("condition") String condition, @Param("type") String type);
 
     /**
      * 删除某个

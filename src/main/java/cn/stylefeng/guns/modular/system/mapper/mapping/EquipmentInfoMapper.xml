@@ -15,9 +15,16 @@
     <select id="selectEquipmentInfos" resultType="map">
         select  <include refid="Base_Column_List"/>
         from equipment_info ept
-       <!-- <if test="condition != null">
-            where ept.dcs_certificate_code like CONCAT('%',#{condition},'%')
-        </if>-->
+        where 1=1
+        <if test="condition != null">
+           and  ept.ept_status like CONCAT('%',#{condition},'%')
+            or   ept.ept_oem  like CONCAT('%',#{condition},'%')
+            or   ept.ept_name  like CONCAT('%',#{condition},'%')
+            or   ept.factory_code  like CONCAT('%',#{condition},'%')
+            or   ept.measur_rang   like CONCAT('%',#{condition},'%')
+            or   ept.professional_use  like CONCAT('%',#{condition},'%')
+            or   ept.ept_person  like CONCAT('%',#{condition},'%')
+        </if>
         order by ept.open_Time asc
     </select>
 

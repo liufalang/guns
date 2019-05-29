@@ -24,9 +24,15 @@
         select  <include refid="Base_Column_List"/>
         FROM
         frock_info f
-       <!-- <if test="condition != null">
-            where f.dcs_certificate_code like CONCAT('%',#{condition},'%')
-        </if>-->
+        where 1=1
+        <if test="condition != null">
+            and  f.factory_code like CONCAT('%',#{condition},'%')
+			or  f.professional_use like CONCAT('%',#{condition},'%')
+			or  f.fro_status like CONCAT('%',#{condition},'%')
+			or  f.fro_name like CONCAT('%',#{condition},'%')
+			or  f.fro_model like CONCAT('%',#{condition},'%')
+			or  f.fro_code like CONCAT('%',#{condition},'%')
+        </if>
         order by f.open_time asc
     </select>
 

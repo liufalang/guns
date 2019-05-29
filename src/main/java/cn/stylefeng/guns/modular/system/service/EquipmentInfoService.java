@@ -3,6 +3,8 @@ package cn.stylefeng.guns.modular.system.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.stylefeng.guns.core.common.constant.cache.Cache;
 import cn.stylefeng.guns.core.common.page.LayuiPageFactory;
+import cn.stylefeng.guns.core.shiro.ShiroKit;
+import cn.stylefeng.guns.core.shiro.ShiroUser;
 import cn.stylefeng.guns.core.util.CacheUtil;
 import cn.stylefeng.guns.modular.system.entity.EquipmentInfo;
 import cn.stylefeng.guns.modular.system.mapper.EquipmentInfoMapper;
@@ -43,6 +45,11 @@ public class EquipmentInfoService extends ServiceImpl<EquipmentInfoMapper, Equip
         equipmentInfo.setProcurementTime(new Date());
         equipmentInfo.setOpenTime(new Date());
         equipmentInfo.setId(UUID.randomUUID().toString());
+        equipmentInfo.setEptCode(UUID.randomUUID().toString()+"shebei");
+        ShiroUser shiroUser = ShiroKit.getUserNotNull();
+        equipmentInfo.setEptPerson(shiroUser.getName());
+        equipmentInfo.setEptStatus("完好");
+        equipmentInfo.setEptType("常用设备");
         this.save(equipmentInfo);
     }
 
