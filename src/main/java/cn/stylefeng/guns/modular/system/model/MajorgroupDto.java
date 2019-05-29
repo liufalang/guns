@@ -13,36 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.stylefeng.guns.core.common.constant.cache;
+package cn.stylefeng.guns.modular.system.model;
+
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 /**
- * 缓存标识前缀集合,常用在ConstantFactory类中
+ * 用户传输bean
  *
- * @author fengshuonan
- * @date 2017-04-25 9:37
+ * @author stylefeng
+ * @Date 2017/5/5 22:40
  */
-public interface CacheKey {
+@Data
+public class MajorgroupDto {
 
-    /**
-     * 角色名称(多个)
-     */
-    String ROLES_NAME = "roles_name_";
-
-    /**
-     * 角色名称(单个)
-     */
-    String SINGLE_ROLE_NAME = "single_role_name_";
-
-    /**
-     * 角色英文名称
-     */
-    String SINGLE_ROLE_TIP = "single_role_tip_";
-
-    /**
-     * 部门名称
-     */
-    String DEPT_NAME = "dept_name_";
-
-    String ID="id";
+    private String id;
+    private String name;
+    private String deptId;
+    private String status;
 
 }

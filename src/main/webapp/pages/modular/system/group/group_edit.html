@@ -1,0 +1,29 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/system/group/group_edit.js"]}){
+<form id="groupForm" lay-filter="groupForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">专业组名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="name" placeholder="请输入专业组名称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属部门<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="pid" name="pid" type="hidden">
+            <input id="deptId" name="deptId" placeholder="请输入所属部门" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">状态<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="status" name="status" placeholder="请输入状态" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

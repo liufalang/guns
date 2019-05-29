@@ -49,4 +49,16 @@ public class DeptTest extends BaseJunit {
         Integer integer = deptMapper.deleteById(dept);
         assertTrue(integer > 0);
     }
+
+    @Test
+    public void testTest(){
+        int i=7;
+
+        do{
+            System.out.println(i--);
+            System.out.println(i);
+            i--;
+            System.out.println(i);
+        }while(i!=0);
+    }
 }

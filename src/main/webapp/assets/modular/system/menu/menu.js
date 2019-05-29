@@ -7,7 +7,7 @@ layui.use(['layer', 'form', 'ztree', 'laydate', 'admin', 'ax', 'table', 'treetab
     var admin = layui.admin;
     var table = layui.table;
     var treetable = layui.treetable;
-
+    var MyDate=new Date();
     /**
      * 系统管理--菜单管理
      */
@@ -125,6 +125,8 @@ layui.use(['layer', 'form', 'ztree', 'laydate', 'admin', 'ax', 'table', 'treetab
      * 初始化表格
      */
     Menu.initTable = function (menuId, data) {
+        console.log(MyDate.toLocaleString( ));
+
         return treetable.render({
             elem: '#' + menuId,
             url: Feng.ctxPath + '/menu/listTree',
@@ -140,8 +142,10 @@ layui.use(['layer', 'form', 'ztree', 'laydate', 'admin', 'ax', 'table', 'treetab
             treeDefaultClose: false,
             treeLinkage: true
         });
+        alert(data);
     };
-
+    // layui.form.render();
+    console.log(MyDate.toLocaleString( ));
     // 渲染表格
     var tableResult = Menu.initTable(Menu.tableId);
     $('#expandAll').click(function () {

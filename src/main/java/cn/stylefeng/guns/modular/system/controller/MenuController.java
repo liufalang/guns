@@ -73,6 +73,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
+//        System.out.println("fdsfds");
         return PREFIX + "menu.html";
     }
 
@@ -157,10 +158,13 @@ public class MenuController extends BaseController {
     public Object listTree(@RequestParam(required = false) String menuName,
                            @RequestParam(required = false) String level) {
         List<Map<String, Object>> menus = this.menuService.selectMenuTree(menuName, level);
+//        System.out.println(menus.toString());
         List<Map<String, Object>> menusWrap = new MenuWrapper(menus).wrap();
 
         LayuiPageInfo result = new LayuiPageInfo();
         result.setData(menusWrap);
+//        System.out.println(resu);
+//        System.out.println(menusWrap.toString());
         return result;
     }
 
