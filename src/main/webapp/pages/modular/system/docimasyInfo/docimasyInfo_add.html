@@ -1,0 +1,66 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/system/docimasyInfo/docimasyInfo_add.js"]}){
+<form id="userForm" lay-filter="docimasyInfoForm" class="layui-form model-form">
+    <input name="typeId" type="hidden" value="${typeId}"/>
+    <input name="type" type="hidden" value="${type}"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">检定编号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="dcsCode" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">送检方式<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="dcsInspection"  type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">检定周期<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="dcsMonth"  type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">承检单位<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="dcsUnit" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否现场检定<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="isDcsScene" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">检定费用<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="dcsCost"  type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">其他费用<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="otherCost" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">证书编号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input  name="dcsCertificateCode"  type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">检定结论<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="dcsResult"  type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}
+

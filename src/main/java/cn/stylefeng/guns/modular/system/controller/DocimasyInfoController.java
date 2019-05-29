@@ -63,7 +63,8 @@ public class DocimasyInfoController extends BaseController {
      * @Date 2018/12/23 6:30 PM
      */
     @RequestMapping("")
-    public String index() {
+    public String index(String type, Model model) {
+        model.addAttribute("type",type);
         return PREFIX + "/docimasyInfo.html";
     }
 
@@ -73,8 +74,10 @@ public class DocimasyInfoController extends BaseController {
      * @author fengshuonan
      * @Date 2018/12/23 6:30 PM
      */
-    @PostMapping(value = "/docimasyInfo_add")
-    public String docimasyInfoAdd() {
+    @RequestMapping(value = "/docimasyInfo_add")
+    public String docimasyInfoAdd(String  typeId, Model model,String type) {
+        model.addAttribute("typeId",typeId);
+        model.addAttribute("type",type);
         return PREFIX + "/docimasyInfo_add.html";
     }
 
@@ -84,9 +87,8 @@ public class DocimasyInfoController extends BaseController {
      * @author fengshuonan
      * @Date 2018/12/23 6:31 PM
      */
-    @Permission
     @RequestMapping(value = "/docimasyInfo_edit")
-    public String docimasyInfoEdit(@RequestParam Long id) {
+    public String docimasyInfoEdit(@RequestParam String  id) {
         if (ToolUtil.isEmpty(id)) {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -95,21 +97,7 @@ public class DocimasyInfoController extends BaseController {
         return PREFIX + "/docimasyInfo_edit.html";
     }
 
-    /**
-     * 跳转到权限分配
-     *
-     * @author fengshuonan
-     * @Date 2018/12/23 6:31 PM
-     */
-    @Permission
-    @RequestMapping(value = "/docimasyInfo_assign/{id}")
-    public String docimasyInfoAssign(@PathVariable("id") Long id, Model model) {
-        if (ToolUtil.isEmpty(id)) {
-            throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
-        }
-        model.addAttribute("id", id);
-        return PREFIX + "/docimasyInfo_assign.html";
-    }
+
 
     /**
      * 获取列表
@@ -118,10 +106,10 @@ public class DocimasyInfoController extends BaseController {
      * @Date 2018/12/23 6:31 PM
      */
     @ApiOperation(value="获取信息List")
-    @PostMapping(value = "/list")
+    @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list( String docimasyInfoName) {
-        Page<Map<String, Object>> docimasyInfos = this.docimasyInfoService.selectDocimasyInfos(docimasyInfoName);
+    public Object list( String condition,String type) {
+        Page<Map<String, Object>> docimasyInfos = this.docimasyInfoService.selectDocimasyInfos(condition,type);
         Page<Map<String, Object>> wrap = new DocimasyInfoWrapper(docimasyInfos).wrap();
         return LayuiPageFactory.createPageInfo(wrap);
     }
@@ -133,7 +121,7 @@ public class DocimasyInfoController extends BaseController {
      * @Date 2018/12/23 6:31 PM
      */
     @ApiOperation(value="add")
-    @PostMapping(value = "/add")
+    @RequestMapping(value = "/add")
     @ResponseBody
     public ResponseData add(DocimasyInfo docimasyInfo) {
         this.docimasyInfoService.addDocimasyInfo(docimasyInfo);
@@ -147,8 +135,7 @@ public class DocimasyInfoController extends BaseController {
      * @Date 2018/12/23 6:31 PM
      */
     @ApiOperation(value="edit")
-    @PostMapping(value = "/edit")
-    @Permission(Const.ADMIN_NAME)
+    @RequestMapping(value = "/edit")
     @ResponseBody
     public ResponseData edit( DocimasyInfo docimasyInfo) {
         this.docimasyInfoService.editDocimasyInfo(docimasyInfo);
@@ -162,7 +149,7 @@ public class DocimasyInfoController extends BaseController {
      * @Date 2018/12/23 6:31 PM
      */
     @ApiOperation(value="del")
-    @GetMapping(value = "/remove")
+    @RequestMapping(value = "/remove")
     @ResponseBody
     public ResponseData remove(@RequestParam String id) {
         this.docimasyInfoService.deleteDocimasyInfosById(id);
@@ -175,17 +162,32 @@ public class DocimasyInfoController extends BaseController {
      * @author fengshuonan
      * @Date 2018/12/23 6:31 PM
      */
-    @PostMapping(value = "/view/{id}")
+    @RequestMapping(value = "/view/{id}")
     @ApiOperation(value="get")
     @ResponseBody
-    public ResponseData view(@PathVariable String id) {
+    public Object view(@PathVariable String id) {
         if (ToolUtil.isEmpty(id)) {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
         DocimasyInfo docimasyInfo = this.docimasyInfoService.getById(id);
 
-        return ResponseData.success(docimasyInfo);
+        return docimasyInfo;
     }
 
-
+    /**
+     * 查看
+     *
+     * @author fengshuonan
+     * @Date 2018/12/23 6:31 PM
+     */
+    @RequestMapping("/typeId")
+    @ApiOperation(value="get")
+    @ResponseBody
+    public Object viewTypeId( String typeId) {
+        DocimasyInfo docimasyInfoByTypeId = docimasyInfoService.findDocimasyInfoByTypeId(typeId);
+        if(docimasyInfoByTypeId==null){
+            return "fail";
+        }
+        return docimasyInfoByTypeId;
+    }
 }

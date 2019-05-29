@@ -4,6 +4,8 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.stylefeng.guns.core.common.constant.cache.Cache;
 import cn.stylefeng.guns.core.common.page.LayuiPageFactory;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
+import cn.stylefeng.guns.core.shiro.ShiroKit;
+import cn.stylefeng.guns.core.shiro.ShiroUser;
 import cn.stylefeng.guns.core.util.CacheUtil;
 import cn.stylefeng.guns.modular.system.entity.FrockInfo;
 import cn.stylefeng.guns.modular.system.mapper.FrockInfoMapper;
@@ -12,6 +14,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -40,6 +43,12 @@ public class FrockInfoService extends ServiceImpl<FrockInfoMapper, FrockInfo> {
     @Transactional(rollbackFor = Exception.class)
     public void addFrockInfo(FrockInfo frockInfo) {
         frockInfo.setId(UUID.randomUUID().toString());
+        frockInfo.setFroCode(UUID.randomUUID().toString()+"gz");
+        ShiroUser shiroUser = ShiroKit.getUserNotNull();
+        frockInfo.setFroStatus("完好");
+        frockInfo.setFroPerson(shiroUser.getName());
+        frockInfo.setOpenTime(new Date());
+        frockInfo.setProcurementTime(new Date());
         this.save(frockInfo);
     }
 

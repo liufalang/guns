@@ -49,7 +49,17 @@ public class DocimasyInfo implements Serializable {
 	@TableField("dcs_result")
 	private String dcsResult;		// 检定结论
 	@TableField("type_id")
-	private Long typeId;		// 设备 工装id
+	private String typeId;		// 设备 工装id
+	@TableField("type")
+	private String type;		// 设备 工装
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getId() {
 		return id;
@@ -155,11 +165,11 @@ public class DocimasyInfo implements Serializable {
 		this.dcsResult = dcsResult;
 	}
 
-	public Long getTypeId() {
+	public String getTypeId() {
 		return typeId;
 	}
 
-	public void setTypeId(Long typeId) {
+	public void setTypeId(String typeId) {
 		this.typeId = typeId;
 	}
 }

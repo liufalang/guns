@@ -4,12 +4,22 @@
 
     <select id="selectDocimasyInfos" resultType="map">
         select  di.id ,di.dcs_certificate_code  dcsCertificateCode
-        ,di.dcs_code  dcsCode ,di.dcs_cost dcs_cost ,di.dcs_inspection dcsInspection,di.dcs_Month dcsMonth,
+        ,di.dcs_code  dcsCode ,di.dcs_cost dcsCost ,di.dcs_inspection dcsInspection,di.dcs_Month dcsMonth,
         di.dcs_next_time dcsNextTime,di.dcs_result dcsResult,di.dcs_time dcsTime,di.dcs_unit dcsUnit,
         di.is_dcs_scene isDcsScene,di.other_cost otherCost ,di.type_code typeCode,di.type_id typeId
         from  docimasy_info di
+        where 1=1
         <if test="condition != null">
-            where di.dcs_certificate_code like CONCAT('%',#{condition},'%')
+            and (di.dcs_certificate_code like CONCAT('%',#{condition},'%')
+            or di.dcs_code like CONCAT('%',#{condition},'%')
+            or di.dcs_cost like CONCAT('%',#{condition},'%')
+            or di.dcs_inspection like CONCAT('%',#{condition},'%')
+            or di.dcs_Month like CONCAT('%',#{condition},'%')
+            or di.type_Code  like CONCAT('%',#{condition},'%')
+            or di.dcs_result  like CONCAT('%',#{condition},'%'))
+        </if>
+          <if test="type != null">
+          and di.type= #{type}
         </if>
         order by di.dcs_time asc
     </select>

@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 package cn.stylefeng.guns.modular.system.controller;
+import cn.hutool.core.bean.BeanUtil;
 import cn.stylefeng.guns.core.common.annotion.Permission;
 import cn.stylefeng.guns.core.common.constant.Const;
+import cn.stylefeng.guns.core.common.constant.factory.ConstantFactory;
 import cn.stylefeng.guns.core.common.exception.BizExceptionEnum;
 import cn.stylefeng.guns.core.common.page.LayuiPageFactory;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
 import cn.stylefeng.guns.modular.system.entity.EquipmentInfo;
+import cn.stylefeng.guns.modular.system.model.EquipmentInfoDto;
 import cn.stylefeng.guns.modular.system.service.EquipmentInfoService;
 import cn.stylefeng.guns.modular.system.service.UserService;
 import cn.stylefeng.guns.modular.system.warpper.EquipmentInfoWrapper;
@@ -53,9 +56,9 @@ public class EquipmentInfoController extends BaseController {
 
     @Autowired
     private UserService userService;
-
     @Autowired
     private EquipmentInfoService equipmentInfoService;
+
 
     /**
      * 跳转到列表页面
@@ -74,8 +77,8 @@ public class EquipmentInfoController extends BaseController {
      * @author fengshuonan
      * @Date 2018/12/23 6:30 PM
      */
-    @PostMapping(value = "/equipmentInfo_add")
-    public String EquipmentInfoAdd() {
+    @RequestMapping(value = "/equipmentInfo_add")
+    public String equipmentInfoAdd() {
         return PREFIX + "/equipmentInfo_add.html";
     }
 
@@ -85,13 +88,12 @@ public class EquipmentInfoController extends BaseController {
      * @author fengshuonan
      * @Date 2018/12/23 6:31 PM
      */
-    @Permission
     @RequestMapping(value = "/equipmentInfo_edit")
-    public String EquipmentInfoEdit(@RequestParam Long EquipmentInfoId) {
-        if (ToolUtil.isEmpty(EquipmentInfoId)) {
+    public String equipmentInfoEdit(@RequestParam String id) {
+        if (ToolUtil.isEmpty(id)) {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
-        EquipmentInfo EquipmentInfo = this.equipmentInfoService.getById(EquipmentInfoId);
+        EquipmentInfo EquipmentInfo = this.equipmentInfoService.getById(id);
         LogObjectHolder.me().set(EquipmentInfo);
         return PREFIX + "/EquipmentInfo_edit.html";
     }
@@ -103,12 +105,12 @@ public class EquipmentInfoController extends BaseController {
      * @Date 2018/12/23 6:31 PM
      */
     @Permission
-    @RequestMapping(value = "/equipmentInfo_assign/{equipmentInfoId}")
-    public String EquipmentInfoAssign(@PathVariable("equipmentInfoId") Long EquipmentInfoId, Model model) {
-        if (ToolUtil.isEmpty(EquipmentInfoId)) {
+    @RequestMapping(value = "/equipmentInfo_assign/{id}")
+    public String EquipmentInfoAssign(@PathVariable("id") String id, Model model) {
+        if (ToolUtil.isEmpty(id)) {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
-        model.addAttribute("equipmentInfoId", EquipmentInfoId);
+        model.addAttribute("id", id);
         return PREFIX + "/equipmentInfo_assign.html";
     }
 
@@ -119,10 +121,10 @@ public class EquipmentInfoController extends BaseController {
      * @Date 2018/12/23 6:31 PM
      */
     @ApiOperation(value="获取信息List")
-    @PostMapping(value = "/list")
+    @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list( String EquipmentInfoName) {
-        Page<Map<String, Object>> EquipmentInfos = this.equipmentInfoService.selectEquipmentInfos(EquipmentInfoName);
+    public Object list( String condition) {
+        Page<Map<String, Object>> EquipmentInfos = this.equipmentInfoService.selectEquipmentInfos(condition);
         Page<Map<String, Object>> wrap = new EquipmentInfoWrapper(EquipmentInfos).wrap();
         return LayuiPageFactory.createPageInfo(wrap);
     }
@@ -134,10 +136,10 @@ public class EquipmentInfoController extends BaseController {
      * @Date 2018/12/23 6:31 PM
      */
     @ApiOperation(value="add")
-    @PostMapping(value = "/add")
+    @RequestMapping(value = "/add")
     @ResponseBody
-    public ResponseData add(EquipmentInfo EquipmentInfo) {
-        this.equipmentInfoService.addEquipmentInfo(EquipmentInfo);
+    public ResponseData add(EquipmentInfo equipmentInfo) {
+        this.equipmentInfoService.addEquipmentInfo(equipmentInfo);
         return SUCCESS_TIP;
     }
 
@@ -148,8 +150,7 @@ public class EquipmentInfoController extends BaseController {
      * @Date 2018/12/23 6:31 PM
      */
     @ApiOperation(value="edit")
-    @PostMapping(value = "/edit")
-    @Permission(Const.ADMIN_NAME)
+    @RequestMapping(value = "/edit")
     @ResponseBody
     public ResponseData edit( EquipmentInfo equipmentInfo) {
         this.equipmentInfoService.editEquipmentInfo(equipmentInfo);
@@ -163,7 +164,7 @@ public class EquipmentInfoController extends BaseController {
      * @Date 2018/12/23 6:31 PM
      */
     @ApiOperation(value="del")
-    @GetMapping(value = "/remove")
+    @RequestMapping(value = "/remove")
     @ResponseBody
     public ResponseData remove(@RequestParam String id) {
         this.equipmentInfoService.deleteEquipmentInfosById(id);
@@ -177,15 +178,17 @@ public class EquipmentInfoController extends BaseController {
      * @Date 2018/12/23 6:31 PM
      */
     @ApiOperation(value="get")
-    @PostMapping(value = "/view/{id}")
+    @RequestMapping(value = "/view/{id}")
     @ResponseBody
-    public ResponseData view(@PathVariable String id) {
+    public Object view(@PathVariable String id) {
         if (ToolUtil.isEmpty(id)) {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
         EquipmentInfo equipmentInfo = this.equipmentInfoService.getById(id);
-
-        return ResponseData.success(equipmentInfo);
+        EquipmentInfoDto edto= new EquipmentInfoDto();
+        BeanUtil.copyProperties(equipmentInfo, edto);
+        edto.setDeptName( ConstantFactory.me().getDeptName(equipmentInfo.getDeptId()));
+        return edto;
     }
 
 
