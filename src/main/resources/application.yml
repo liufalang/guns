@@ -31,5 +31,8 @@ spring:
 mybatis-plus:
   typeAliasesPackage: cn.stylefeng.guns.modular.system.model
 
-log:
-  path: guns-logs
+#log:
+#  path: guns-logs
+logging:
+  path: ./log
+  file: ./log/guns.log

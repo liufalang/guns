@@ -24,6 +24,8 @@ import cn.stylefeng.guns.modular.system.service.UserService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +44,9 @@ import static cn.stylefeng.roses.core.util.HttpContext.getIp;
  */
 @Controller
 public class LoginController extends BaseController {
+
+    private static Logger logger = LoggerFactory.getLogger(LogManager.class);
+
 
     @Autowired
     private UserService userService;
@@ -79,6 +84,7 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
+//        logger.info("fdsfsdfdsfdsfds");
         if (ShiroKit.isAuthenticated() || ShiroKit.getUser() != null) {
             return REDIRECT + "/";
         } else {
