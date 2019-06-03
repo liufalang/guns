@@ -38,6 +38,7 @@ import cn.stylefeng.guns.modular.system.factory.UserFactory;
 import cn.stylefeng.guns.modular.system.model.MajorgroupDto;
 import cn.stylefeng.guns.modular.system.model.RoleDto;
 import cn.stylefeng.guns.modular.system.model.UserDto;
+import cn.stylefeng.guns.modular.system.service.DeptService;
 import cn.stylefeng.guns.modular.system.service.MajorgroupService;
 import cn.stylefeng.guns.modular.system.service.UserService;
 import cn.stylefeng.guns.modular.system.warpper.MajorgroupWrapper;
@@ -81,6 +82,8 @@ public class MajorgroupController extends BaseController {
     @Autowired
     MajorgroupService majorgroupService;
 
+    @Autowired
+    DeptService deptService;
 
     @RequestMapping("")
     public String index() {
@@ -136,7 +139,9 @@ public class MajorgroupController extends BaseController {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
         Majorgroup majorgroup = this.majorgroupService.getById(id);
+
         Map<String, Object> roleMap = BeanUtil.beanToMap(majorgroup);
+        roleMap.put("deptName",(deptService.getById(majorgroup.getDeptId())).getSimpleName());
         System.out.println(roleMap.toString());
         return ResponseData.success(roleMap);
     }

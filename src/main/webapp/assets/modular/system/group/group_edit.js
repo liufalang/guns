@@ -1,10 +1,10 @@
 /**
  * 角色详情对话框
  */
-var groupInfoDlg = {
+var UserInfoDlg = {
     data: {
-        pid: "",
-        pName: ""
+        deptId: "",
+        deptName: ""
     }
 };
 
@@ -40,7 +40,24 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     //         }
     //     });
     // });
+// 点击部门时
+    $('#deptName').click(function () {
+        var formName = encodeURIComponent("parent.UserInfoDlg.data.deptName");
+        var formId = encodeURIComponent("parent.UserInfoDlg.data.deptId");
+        var treeUrl = encodeURIComponent(Feng.ctxPath + "/dept/tree");
 
+        layer.open({
+            type: 2,
+            title: '部门选择',
+            area: ['300px', '400px'],
+            content: Feng.ctxPath + '/system/commonTree?formName=' + formName + "&formId=" + formId + "&treeUrl=" + treeUrl,
+            end: function () {
+                console.log(UserInfoDlg.data);
+                $("#deptId").val(UserInfoDlg.data.deptId);
+                $("#deptName").val(UserInfoDlg.data.deptName);
+            }
+        });
+    });
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/group/edit", function (data) {

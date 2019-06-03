@@ -26,7 +26,8 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax'], function () {
             {type: 'checkbox'},
             {field: 'id', sort: true, title: '专业组ID'},
             {field: 'name', sort: true, title: '专业组名称'},
-            {field: 'deptId', sort: true, title: '部门ID'},
+            // {field: 'deptId', sort: true, title: '部门ID'},
+            {field: 'deptName', sort: true, title: '部门名称'},
             {field: 'status', sort: true, title: '状态'},
             {align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 200}
         ]];
@@ -51,6 +52,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax'], function () {
         top.layui.admin.open({
             type: 2,
             title: '添加专业组',
+            area: ['400px', '700px'],
             content: Feng.ctxPath + '/group/group_add',
             end: function () {
                 admin.getTempData('formOk') && table.reload(group.tableId);

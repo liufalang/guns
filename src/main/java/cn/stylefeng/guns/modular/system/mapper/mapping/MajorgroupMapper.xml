@@ -13,15 +13,16 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Group_Column_List">
-        id , name , dept_id AS deptId,
+        id , name,
         status
     </sql>
 
     <select id="selectGroup" resultType="map">
     select
-    <include refid="Group_Column_List"/>
-    from sys_majorgroup
+    <include refid="Group_Column_List"/>,sys_dept.simple_name as deptName,sys_majorgroup.dept_id as deptId
+    from sys_majorgroup,sys_dept
     where STATUS != '0'
+    and sys_majorgroup.dept_id=sys_dept.dept_id
     <if test="name != null and name != ''">
 
         and NAME like CONCAT('%',#{name},'%')
@@ -32,7 +33,7 @@
         </if>
         <if test="deptId != null and deptId != ''">
 
-            and dept_id=#{deptId}
+            and sys_majorgroup.dept_id=#{deptId}
         </if>
 
     </select>

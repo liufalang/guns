@@ -38,6 +38,7 @@ public class UserDict extends AbstractDictMap {
         put("roleId", "角色名称");
         put("deptId", "部门名称");
         put("roleIds", "角色名称集合");
+        put("workTime", "入所时间");
     }
 
     @Override

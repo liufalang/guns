@@ -240,6 +240,7 @@ public class UserMgrController extends BaseController {
         if (result.hasErrors()) {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
+        System.out.println(user.getJoinDate());
         this.userService.editUser(user);
         return SUCCESS_TIP;
     }

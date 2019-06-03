@@ -1,7 +1,12 @@
 /**
  * 角色详情对话框
  */
-
+var UserInfoDlg = {
+    data: {
+        deptId: "",
+        deptName: ""
+    }
+};
 
 layui.use(['layer', 'form', 'admin', 'ax'], function () {
     var $ = layui.jquery;
@@ -12,6 +17,7 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
 
     // 让当前iframe弹层高度适应
     admin.iframeAuto();
+    // admin.iframe.area['400px', '700px'];
 
     // // 点击上级角色时
     // $('#pName').click(function () {
@@ -30,7 +36,24 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     //         }
     //     });
     // });
+// 点击部门时
+    $('#deptName').click(function () {
+        var formName = encodeURIComponent("parent.UserInfoDlg.data.deptName");
+        var formId = encodeURIComponent("parent.UserInfoDlg.data.deptId");
+        var treeUrl = encodeURIComponent(Feng.ctxPath + "/dept/tree");
 
+        layer.open({
+            type: 2,
+            title: '部门选择',
+            area: ['300px', '400px'],
+            content: Feng.ctxPath + '/system/commonTree?formName=' + formName + "&formId=" + formId + "&treeUrl=" + treeUrl,
+            end: function () {
+                console.log(UserInfoDlg.data);
+                $("#deptId").val(UserInfoDlg.data.deptId);
+                $("#deptName").val(UserInfoDlg.data.deptName);
+            }
+        });
+    });
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/group/add", function (data) {

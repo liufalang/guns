@@ -36,6 +36,7 @@ public class UserDto {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
+
     private String sex;
     private String email;
     private String phone;
@@ -49,5 +50,8 @@ public class UserDto {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date joinDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date workTime;
 
 }

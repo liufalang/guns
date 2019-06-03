@@ -31,8 +31,17 @@ spring:
 mybatis-plus:
   typeAliasesPackage: cn.stylefeng.guns.modular.system.model
 
-#log:
-#  path: guns-logs
-logging:
-  path: ./log
-  file: ./log/guns.log
+log:
+  path: guns-logs
+#logging:
+#  path: ./log
+#  file: ./log/guns.log
+
+task:
+  corePoolSize: 10
+  maxPoolSize: 100
+  queueCapacity: 30
+  keepAliveSeconds: 300
+timedTask:
+  task1: 0/5 * * * * ?
+  task2: 0/5 * * * * ?
